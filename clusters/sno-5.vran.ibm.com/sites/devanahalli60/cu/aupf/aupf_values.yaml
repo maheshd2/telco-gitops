@@ -1,0 +1,48 @@
+global:
+    # ems ip address
+    emsIp: "2001:100:252::19a:10:10"
+ 
+    # ne information
+    namespace: "cnf"
+    neType: "aupf"
+    neId: "20001"
+    flavorId: "tiny-up-mec"
+    podGroupPolicy: "cmp0#1-dmp0#1-pmp0#1-upp0#1-usp0#1-uip0#1-utp0#1"
+ 
+    # continaer image & policy
+    images:
+        repository: "SSBastion.comm.ibm.gsc:5000"
+        pullPolicy: "IfNotPresent"
+        pullSecrets: "UNUSED"
+        cmp: "rel-ran/vzw-aupf-cmp:SVR21AUPCVZWI32_R00"
+        dmp: "rel-ran/vzw-aupf-dmp:SVR21AUPCVZWI32_R00"
+        pmp: "rel-ran/vzw-aupf-pmp:SVR21AUPCVZWI32_R00"
+        upp: "rel-ran/vzw-aupf-upp:SVR21AUPCVZWI32_R00"
+        usp: "rel-ran/vzw-aupf-usp:SVR21AUPCVZWI32_R00"
+        uip: "rel-ran/vzw-aupf-uip:SVR21AUPCVZWI32_R00"
+        utp: "rel-ran/vzw-aupf-utp:SVR21AUPCVZWI32_R00"
+ 
+    # service account to acess the API server. This has a default value if not set.
+    serviceAccountName: "" # "default: vran-serviceaccount"
+ 
+usp:
+    # network attachment definition for sriov
+    sriov:
+        bh0:
+            resource: "openshift.io/sriov_ext0" # sriov 생성 시 작성했던 resourceName을 적는다
+            vlan: "2006"
+            mtu: "1500"
+            cidr: "2001:db8:b00:2006::/64"
+            gw: "2001:db8:b00:2006::1"
+            addr: "2001:db8:b00:2006::11:12"
+ 
+upp:
+    # network attachment definition for sriov
+    sriov:
+        bh0:
+            resource: "openshift.io/f1u"  # sriov 생성 시 작성했던 resourceName을 적는다
+            vlan: "2012"
+            mtu: "1500"
+            cidr: "2001:db8:b00:2012::/64"
+            gw: "2001:db8:b00:2012::1"
+            addr: "2001:db8:b00:2012::11:12"
